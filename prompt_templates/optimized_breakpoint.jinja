@@ -1,0 +1,133 @@
+```{{ lang1 }}
+{{ code }}
+```
+
+Insert breakpoints into the provided code in positions that will best reveal the execution flow and variable values.
+
+# Steps
+- Identify the key areas of the code where it is most important to track the execution, such as before loops, after condition checks, and before or after critical computations or function calls.
+- Insert print statements to output variable values and track progress at each breakpoint.
+- The output for each breakpoint should start with the prefix `<breakpoint>` and end with `</breakpoint>`.
+- Ensure that the breakpoints display useful information relevant to understanding the program's logic and flow, such as variable values at key points.
+
+# Output Format
+Return the modified code with the inserted breakpoints. The format for each breakpoint output should be:
+```<breakpoint> [description of the current location in the code] : [variable_name] = [variable_value] </breakpoint>```
+
+# Example
+
+**Input code:**
+{% if lang1 == 'cpp' %}
+```cpp
+#include <iostream>
+using namespace std;
+
+int add(int x, int y) {
+    int result = x + y;
+    return result;
+}
+
+int main() {
+    int a = 5;
+    int b = 10;
+    int total = add(a, b);
+    cout << total << endl;
+    return 0;
+}
+```
+{% elif lang1 == 'java' %}
+```java
+public class Main {
+    public static int add(int x, int y) {
+        int result = x + y;
+        return result;
+    }
+
+    public static void main(String[] args) {
+        int a = 5;
+        int b = 10;
+        int total = add(a, b);
+        System.out.println(total);
+    }
+}
+```
+{% else %}
+```python
+def add(x, y):
+    result = x + y
+    return result
+
+a = 5
+b = 10
+total = add(a, b)
+print(total)
+```
+{% endif %}
+
+
+**Modified code with breakpoints:**
+{% if lang1 == 'cpp' %}
+```cpp
+#include <iostream>
+using namespace std;
+
+int add(int x, int y) {
+    cout << "<breakpoint> Entering add function: x = " << x << ", y = " << y << "</breakpoint>" << endl;
+    int result = x + y;
+    cout << "<breakpoint> Before return: result = " << result << "</breakpoint>" << endl;
+    return result;
+}
+
+int main() {
+    int a = 5;
+    cout << "<breakpoint> Initial value of a = " << a << "</breakpoint>" << endl;
+    int b = 10;
+    cout << "<breakpoint> Initial value of b = " << b << "</breakpoint>" << endl;
+    int total = add(a, b);
+    cout << "<breakpoint> After add function: total = " << total << "</breakpoint>" << endl;
+    cout << total << endl;
+    return 0;
+}
+```cpp
+{% elif lang1 == 'java' %}
+```java
+public class Main {
+    public static int add(int x, int y) {
+        System.out.println("<breakpoint> Entering add function: x = " + x + ", y = " + y + "</breakpoint>");
+        int result = x + y;
+        System.out.println("<breakpoint> Before return: result = " + result + "</breakpoint>");
+        return result;
+    }
+
+    public static void main(String[] args) {
+        int a = 5;
+        System.out.println("<breakpoint> Initial value of a = " + a + "</breakpoint>");
+        int b = 10;
+        System.out.println("<breakpoint> Initial value of b = " + b + "</breakpoint>");
+        int total = add(a, b);
+        System.out.println("<breakpoint> After add function: total = " + total + "</breakpoint>");
+        System.out.println(total);
+    }
+}
+```
+{% else %}
+```python
+def add(x, y):
+    print("<breakpoint> Entering add function: x =", x, ", y =", y, "</breakpoint>")
+    result = x + y
+    print("<breakpoint> Before return: result =", result, "</breakpoint>")
+    return result
+
+a = 5
+print("<breakpoint> Initial value of a =", a, "</breakpoint>")
+b = 10
+print("<breakpoint> Initial value of b =", b, "</breakpoint>")
+total = add(a, b)
+print("<breakpoint> After add function: total =", total, "</breakpoint>")
+print(total)
+```
+{% endif %}
+
+# Notes
+- Place breakpoints at points where the code transitions between key steps.
+- Keep the output concise and focused on relevant variable values.
